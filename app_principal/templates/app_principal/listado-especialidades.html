@@ -1,0 +1,38 @@
+{% extends "app_principal/sidebar_administracion.html" %}
+{% load static %}
+{% block content %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'app_principal/css/alta.css' %}">
+{% endblock %}
+
+<div>
+    <h3>Lista de Especialidades</h3>
+    <ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>Especialidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for especialidad in listado_especialidades %}
+                <tr>
+                    <td>{{ especialidad.especialidad | title }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="1">Sin Especialidades Registradas</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </ul>
+</div>
+
+{% if listado_especialidades.count > 0 %}
+<p>Cantidad de Especialidades registradas: {{listado_especialidades.count}}</p>
+{% else %}
+<p>No hay Especialidades</p>
+{% endif %}
+
+{% endblock %}

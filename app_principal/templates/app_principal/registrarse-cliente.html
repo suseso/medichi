@@ -1,0 +1,58 @@
+{% extends "app_principal/navbar.html" %}
+{% load static %}
+{% block content %}
+
+<body>
+
+  <form class="formulario" id="formulario" action="https://formspree.io/f/mjvzlqwn" method="POST">
+    <h1>Registrate</h1>
+    <div class="contenedor">
+      <div class="input-contenedor">
+        <i class="fas fa-user icon"></i>
+        <input id="usuario" type="text" name="name" placeholder="Nombre y Apellido" />
+        <p></p>
+      </div>
+      <br />
+
+      <div class="input-contenedor">
+        <i class="fas fa-id-card icon"></i>
+        <input id="afiliado" type="text" name="num_afiliado" placeholder="Número de afiliado" />
+        <p></p>
+      </div>
+      <br />
+
+      <div class="input-contenedor">
+        <i class="fas fa-envelope icon"></i>
+        <input id="email" type="email" name="replyto" name="Email" placeholder="Correo Electrónico" />
+        <p></p>
+      </div>
+      <br />
+
+      <div class="input-contenedor">
+        <i class="fas fa-key icon"></i>
+        <input id="pass" type="password" name="pass" placeholder="Contraseña" />
+        <p></p>
+      </div>
+      <br />
+
+      <button class="button" type="submit">Submit</button>
+
+      <!-- <input type="submit" value="Registrate" class="button"> -->
+
+      <p>
+        He le&iacute;do y acepto la
+        <a href="javascript:void(0);"
+          onclick="window.open('condiciones-privacidad.html?option=com_content&view=article&id=50&tmpl=component','Privacidad','scrollbars=yes,width=400,height=400')"><b><u>Pol&iacute;­tica
+              de privacidad</u></b></a>
+      </p>
+
+      <p>
+        ¿Ya tienes una cuenta?<a class="link" href="{% url 'login' %}">Iniciar Sesion</a>
+      </p>
+    </div>
+  </form>
+  <script defer src="index.js"></script>
+  <script defer src="email.js"></script>
+</body>
+
+{% endblock %}

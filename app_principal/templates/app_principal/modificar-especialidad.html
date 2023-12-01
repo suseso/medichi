@@ -1,0 +1,18 @@
+{% extends "app_principal/sidebar_administracion.html" %}
+{% load static %}
+{% block content %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'app_principal/css/alta.css' %}">
+{% endblock %}
+
+<h2>Modificar Especialidad</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit">Guardar Cambios</button>
+</form>
+<form method="post" action="{% url 'eliminar_especialidad' especialidad.id %}">
+    {% csrf_token %}
+    <button type="submit">Eliminar</button>
+</form>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "app_principal/sidebar_administracion.html" %}
+{% load static %}
+
+{% block content %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'app_principal/css/alta.css' %}">
+{% endblock %}
+
+<h1>Detalles del Turno</h1>
+
+<p><strong>Fecha:</strong> {{ crearturno.fecha }}</p>
+<p><strong>Hora:</strong> {{ crearturno.hora }}</p>
+<p><strong>Profesional:</strong> {{ crearturno.profesional.nombre_completo }}</p>
+<p><strong>Especialidades:</strong>
+    {% for especialidad in crearturno.especialidades.all %}
+    {{ especialidad.especialidad }}
+    {% if not forloop.last %}, {% endif %}
+    {% endfor %}
+</p>
+<p><strong>Disponible:</strong> {% if crearturno.disponible %}Sí{% else %}No{% endif %}</p>
+
+{% if crearturno.disponible %}
+<p><strong>Acciones:</strong> <a href="{% url 'seleccionar_turno_afiliado' %}">Asignar Afiliado</a></p>
+{% else %}
+{% if crearturno.id %}
+<p><strong>Afiliado Asignado:</strong> {{ crearturno.afiliado.nombre_completo }} -
+    <a href="{% url 'turno_eliminar' pk=crearturno.id %}">Eliminar Turno</a>
+    <a href="{% url 'quitar_afiliado' pk=crearturno.id %}">Quitar Afiliado</a>
+</p>
+
+{% endif %}
+{% endif %}
+
+<a href="{% url 'seleccionar_turno_afiliado' %}">Volver a la Lista de Turnos</a>
+{% endblock %}

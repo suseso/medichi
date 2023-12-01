@@ -1,0 +1,46 @@
+{% extends "app_principal/sidebar_administracion.html" %}
+{% load static %}
+{% block content %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'app_principal/css/alta.css' %}">
+{% endblock %}
+
+
+<div>
+    <h3>Lista de Afiliados</h3>
+    <ul>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>E-mail</th>
+                    <th>DNI</th>
+                    <th>Núm. Afiliado</th>
+                    <th>Cobertura</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for afiliado in listado_afiliados %}
+                <tr>
+                    <td>{{ afiliado.nombre_completo | title }}</td>
+                    <td>{{ afiliado.email}}</td>
+                    <td>{{ afiliado.dni}}</td>
+                    <td>{{ afiliado.numeroAfiliado}}</td>
+                    <td>{{ afiliado.plan}}</td>
+                </tr>
+                {% empty %}
+                <p>Sin Profesionales Regisrados</p>
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </ul>
+</div>
+{% if listado_afiliados.count > 0 %}
+<p>Cantidad de Afiliados registrados: {{listado_afiliados.count}}</p>
+{% else %}
+<p>No hay Afiliados registrados</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "app_principal/sidebar_pacientes.html" %}
+{% load static %}
+{% block content %}
+
+{% block title %}
+<h2> Página de Inicio{% endblock %}</h2>
+
+{% block section_title %}{% endblock %}
+
+<strong>{{ fecha|date:" l, d/m/Y,"}} {{ fecha|time:"H:i" }} hs</strong>
+<str>
+    </p>
+    <h2>Bienvenido a su portal,
+        {% if genero == 'Masculino' %}
+        <b>Sr.</b>
+        {% else %}
+        <b>Sra.</b>
+        {% endif %}
+        <b style="color: rgb(16, 153, 112)">{{ nombre_usuario|title }} </b>
+    </h2>
+</str>
+
+<ul>
+
+    {% if cant_pacientes > 0 %}
+    <h2>Listado de sus doctores:</h2>
+    {% for nombre_doctor in listado_doctores %}
+    <li>
+        <b>
+            {{ nombre_doctor | title }}
+        </b>
+    </li>
+    {% empty %}
+    {% endfor %}
+    {% else %}
+    <h2>No tiene Médicos asociados</h2>
+    {% endif %}
+</ul>
+
+{% endblock %}

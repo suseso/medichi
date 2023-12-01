@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'app_principal/css/sidebar.css' %}">
+    <!-- Boxiocns CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="sidebar close">
+        <div class="logo-details">
+            <i class='bx bx-home-heart'></i>
+            <span class="logo_name">Menú</span>
+        </div>
+        <ul class="nav-links">
+            <li>
+                {% if user.is_authenticated %}
+                <a href="{% url 'inicio-administracion' %}">
+                    <i class='bx bx-grid-alt'></i>
+                    <span class="link_name">Inicio</span>
+                </a>
+
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="{% url 'inicio-administracion' %}">Inicio</a></li>
+                </ul>
+                {% endif %}
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-user-pin'></i>
+                        <span class="link_name">Afiliados</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Afiliados</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'alta-afiliado' %}">Crear Afiliado</a></li>
+                    <li><a href="#">Modificar Afiliado</a></li>
+                    <li><a href="{% url 'listado_afiliados' %}">Listado de Afiliados</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-first-aid'></i>
+                        <span class="link_name">Profesionales</span>
+                    </a>
+
+                </div>
+                <ul class="sub-menu">
+
+                    <li><a class="link_name" href="#">Profesionales</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'alta_profesional' %}">Crear Profesional</a></li>
+                    <li><a href="#">Modificar Profesional</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'listado_profesionales' %}">Listado de Profesionales</a></li>
+
+                </ul>
+            </li>
+            <li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-book-alt'></i>
+                        <span class="link_name">Especialidades</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+                    <li><a class="link_name" href="#">Especialidades</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'alta-especialidad' %}">Crear Especialidad</a></li>
+                    <li><a href="#">Modificar Especialidad</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'listado_especialidades' %}">Listado de Especialidades</a></li>
+
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="#">
+                        <i class='bx bx-calendar'></i>
+                        <span class="link_name">Turnos</span>
+                    </a>
+                    <i class='bx bxs-chevron-down arrow'></i>
+                </div>
+                <ul class="sub-menu">
+
+                    <li><a class="link_name" href="#">Turnos</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'registrar_turno' %}">Registrar Turnos</a></li>
+                    <li><a href="{% url 'seleccionar_turno_afiliado' %}">Seleccionar Turnos</a></li>
+                    <li><a href="{% url 'listado_turnos' %}">Listado de Turnos</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+            <li>
+                {% if user.is_authenticated %}
+                <a href="#">
+                    <i class='bx bx-heart'></i>
+                    <span class="link_name">Mi Plan de Salud</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Mi Plan de Salud</a></li>
+                </ul>
+                {% endif %}
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-capsule'></i>
+                    <span class="link_name">Vademecum</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Vademecum</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#">
+                    <i class='bx bx-cog'></i>
+                    <span class="link_name">Setting</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="#">Setting</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="{% url 'logout' %}">
+                    <i class='bx bx-log-out'></i>
+                    <span class="link_name">Cerrar Sesión</span>
+                </a>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="{% url 'logout' %}   ">Cerrar Sesión</a></li>
+                </ul>
+
+            </li>
+
+        </ul>
+    </div>
+    <section class="home-section">
+        <div class="home-content">
+            <i class='bx bx-menu'></i>
+            <span class="text">Portal de Turnos</span>
+        </div>
+        <main>
+            {% block content %}{% endblock %}</main>
+    </section>
+
+    <script>
+        let arrow = document.querySelectorAll(".arrow");
+        for (var i = 0; i < arrow.length; i++) {
+            arrow[i].addEventListener("click", (e) => {
+                let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
+                arrowParent.classList.toggle("showMenu");
+            });
+        }
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".bx-menu");
+        console.log(sidebarBtn);
+        sidebarBtn.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+        });
+    </script>
+</body>
+
+</html>

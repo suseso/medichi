@@ -1,0 +1,37 @@
+{% extends "app_principal/navbar.html" %}
+{% load static %}
+{% block content %}
+
+<body>
+  <form class="formulario" action="{% url 'portal-medicos' %}" method="post">
+
+    <h1>Login Médicos</h1>
+    <div class="contenedor">
+
+      {% csrf_token %}
+
+      <div class="input-contenedor">
+        <i class="fas fa-id-card icon"></i>
+        {{ form.matricula }}
+        <!--<input type="text" required placeholder="Número de Matrícula">-->
+
+      </div>
+
+      <div class="input-contenedor">
+        <i class="fas fa-key icon"></i>
+        {{ form.contrasena }}
+        <!--<input type="password" required placeholder="Contraseña">-->
+
+      </div>
+      <input type="submit" value="Login" class="button">
+      <!--<p>Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>-->
+      <p>¿No tienes una cuenta? <a class="link" href="{% url 'registrar-doctor' %}">Evíe sus datos al Administrador.
+          Recibirá
+          un mail con los pasos a seguir</a></p>
+    </div>
+  </form>
+
+  </main>
+</body>
+
+{% endblock %}

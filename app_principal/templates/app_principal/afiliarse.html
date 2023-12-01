@@ -1,0 +1,24 @@
+{% extends "app_principal/navbar.html" %}
+{% load static %}
+{% block content %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'app_principal/css/alta.css' %}">
+{% endblock %}
+
+<body>
+
+
+  <h1>Afiliate a nuestra red de Medicina Prepaga</h1>
+  <div class="contenedor">
+
+    <form method="post" action="{% url 'afiliarse' %}">
+      {% csrf_token %}
+      {{ afiliarse_form.as_p }}
+      <b></b>
+      <input type="submit">
+    </form>
+
+  </div>
+</body>
+
+{% endblock %}

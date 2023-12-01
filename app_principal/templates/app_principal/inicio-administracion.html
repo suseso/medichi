@@ -1,0 +1,42 @@
+{% extends "app_principal/sidebar_administracion.html" %}
+{% load static %}
+{% block content %}
+
+
+<strong>{{ fecha|date:" l, d/m/Y,"}} {{ fecha|time:"H:i" }} hs</strong>
+
+<div class="actions">
+    {% if not user.is_authenticated %}
+    <a href="{% url 'login' %}">Login</a>
+    {% else %}
+    <h2>
+        <p>Bienvenid@ <strong>{{user.username}}</strong>
+    </h2>
+    </p>
+    {% endif %}
+</div>
+<!-- {% if cant_pacientes > 0 %}
+<h2>Hoy tiene: {{cant_pacientes}} pacientes</h2>
+{% else %}
+<h2>No hay pacientes para su atencion hoy</h2>
+{% endif %}
+<ul>
+    {% if cant_pacientes > 0 %}
+    <h2>Sus pacientes para hoy son:</h2>
+
+    {% for nombre_paciente in listado_pacientes %}
+    <li>
+        <b>
+            {{ nombre_paciente | title }}
+        </b>
+    </li>
+    {% empty %}
+
+    {% endfor %}
+    {% endif %}
+</ul> -->
+
+
+
+
+{% endblock %}

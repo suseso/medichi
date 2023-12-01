@@ -1,0 +1,61 @@
+{% extends "app_principal/sidebar_administracion.html" %}
+{% load static %}
+{% block content %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'app_principal/css/alta.css' %}">
+{% endblock %}
+
+
+
+<h1>Listado de Turnos</h1>
+<form method="get">
+    <label for="especialidad">Especialidad:</label>
+    <select name="especialidad" id="especialidad">
+        <option value="" selected>Seleccione una especialidad</option>
+        {% for especialidad in especialidades %}
+        <option value="{{ especialidad.id }}">{{ especialidad.especialidad }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="profesional">Profesional:</label>
+    <select name="profesional" id="profesional">
+        <option value="" selected>Seleccione un profesional</option>
+        {% for profesional in profesionales %}
+        <option value="{{ profesional.id }}">{{ profesional.nombre_completo }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="fecha">Fecha:</label>
+    <input type="date" name="fecha" id="fecha">
+
+    <input type="submit" value="Filtrar" class="button" />
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Profesional</th>
+            <th>Especialidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for turno in turnos %}
+        <tr>
+            <td>{{ turno.fecha }}</td>
+            <td>{{ turno.hora }}</td>
+            <td>{{ turno.profesional.nombre_completo }}</td>
+            <td>
+                {% for especialidad in turno.especialidades.all %}
+                {{ especialidad.especialidad }}
+                {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}

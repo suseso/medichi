@@ -1,0 +1,52 @@
+{% extends "app_principal/sidebar_administracion.html" %}
+{% load static %}
+{% block content %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'app_principal/css/alta.css' %}">
+{% endblock %}
+
+<h3>Listado de Profesionales</h3>
+
+{% if listado_profesionales %}
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>E-mail</th>
+            <th>DNI</th>
+            <th>Matricula</th>
+            <th>Especialidad</th>
+            <th>CUIT</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for nombre_profesional in listado_profesionales %}
+        <tr>
+            <td>{{ nombre_profesional.nombre_completo | title }}</td>
+            <td>{{ nombre_profesional.email}}</td>
+            <td>{{ nombre_profesional.dni}}</td>
+            <td>{{ nombre_profesional.matricula}}</td>
+            <td>
+                {% for especialidad in nombre_profesional.especialidades.all %}
+                {{ especialidad.especialidad }}
+                {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+            <td>{{ nombre_profesional.cuit}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% else %}
+<p>Sin Profesionales Registrados</p>
+{% endif %}
+
+{% if listado_profesionales %}
+<p>Cantidad de Profesionales registrados: {{listado_profesionales|length}}</p>
+{% else %}
+<p>No hay Profesionales registrados</p>
+{% endif %}
+
+{% endblock %}

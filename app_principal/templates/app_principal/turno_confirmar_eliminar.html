@@ -1,0 +1,19 @@
+{% extends "app_principal/sidebar_administracion.html" %}
+{% load static %}
+
+{% block content %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'app_principal/css/alta.css' %}">
+{% endblock %}
+
+<h1>Confirmar Eliminación</h1>
+
+<p>¿Estás seguro de que deseas eliminar el turno "{{ object }}"?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sí, eliminar</button>
+</form>
+
+<a href="{% url 'seleccionar_turno_afiliado' %}">Cancelar</a>
+{% endblock %}

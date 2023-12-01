@@ -1,0 +1,67 @@
+{% extends "app_principal/sidebar_administracion.html" %}
+{% load static %}
+
+{% block content %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'app_principal/css/alta.css' %}">
+{% endblock %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
+
+
+
+
+<h1>Asignación de Turnos</h1>
+<form method="post" action="{% url 'seleccionar_turno_afiliado' %}">
+    {% csrf_token %}
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Profesional</th>
+                <th>Especialidad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for turno in turnos %}
+            <tr>
+                <td>{{ turno.fecha }}</td>
+                <td>{{ turno.hora }}</td>
+                <td>{{ turno.profesional.nombre_completo }}</td>
+                <td>
+                    {% for especialidad in turno.especialidades.all %}
+                    {{ especialidad.especialidad }}
+                    {% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% if turno.disponible %}
+                    <select name="afiliado_{{ turno.id }}" id="afiliado_{{ turno.id }}">
+                        <option value="" selected>Seleccione un afiliado</option>
+                        {% for afiliado in afiliados %}
+                        <option value="{{ afiliado.id }}">{{ afiliado.nombre_completo }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" name="turno_id" value="{{ turno.id }}">Asignar Afiliado</button>
+
+                    {% else %}
+                    Turno asignado a {{ turno.afiliado.nombre_completo }} - <a
+                        href="{% url 'turno_eliminar' pk=turno.id %}">Eliminar Turno</a>
+                    <a href="{% url 'quitar_afiliado' pk=turno.id %}">Quitar Afiliado</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</form>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "app_principal/sidebar_administracion.html" %}
+{% load static %}
+{% block content %}
+{% block extra_css %}
+{% if messages %}
+
+<body>
+
+
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <link rel="stylesheet" href="{% static 'app_principal/css/alta.css' %}">
+    {% endblock %}
+    <h3>Ingreso del Nuevo Afiliado</h3>
+    <form method="post" action="{% url 'alta-afiliado' %}">
+        {% csrf_token %}
+        {{ alta_afiliado_form.as_p }}
+        <input type="submit" value="Dar de Alta" class="button" />
+    </form>
+
+    {% endblock %}
+</body>
